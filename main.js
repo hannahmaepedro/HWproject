@@ -28,12 +28,12 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("buttonAdd").addEventListener("click", function () {
         restaurantArray.push(new RestaurantObject(document.getElementById("name").value,
         document.getElementById("city").value, 
-        document.getElementById("state".value,
+        document.getElementById("state").value,
         document.getElementById("URL").value,
-        document.getElementById("select-cuisine").value,
-        document.getElementById("select-priceRange").value))),
-        // selectedCuisine,
-        // selectedPrice))),
+        // document.getElementById("select-cuisine").value,
+        // document.getElementById("select-priceRange").value))),
+        selectedCuisine,
+        selectedPrice)),
         document.location.href= "index.html#ListAll";
     });
 
@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("oneName").innerHTML = "Restaurant Name: " + restaurantArray[localID].Name;
       document.getElementById("oneCity").innerHTML = "City: " + restaurantArray[localID].City;
       document.getElementById("oneState").innerHTML = "State: " + restaurantArray[localID].State;
-      document.getElementById("oneURL").innerHTML = "Website: " + restaurantArray[localID].URL;
+    //   document.getElementById("oneURL").innerHTML = "Website: " + restaurantArray[localID].URL;
       document.getElementById("oneCuisine").innerHTML = "Cuisine: " + restaurantArray[localID].Cuisine
       document.getElementById("onePrice").innerHTML = "Price: " + restaurantArray[localID].Price;
       document.getElementById("oneURL").innerHTML = restaurantArray[localID].URL;
