@@ -23,21 +23,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
     createList();
 
-    //add button events 
-    //Add Restaurant info
+    // ======== ADD button events ==============
+
+    //AADD Restaurant info
     document.getElementById("buttonAdd").addEventListener("click", function () {
         restaurantArray.push(new RestaurantObject(document.getElementById("name").value,
         document.getElementById("city").value, 
         document.getElementById("state").value,
         document.getElementById("URL").value,
-        // document.getElementById("select-cuisine").value,
-        // document.getElementById("select-priceRange").value))),
         selectedCuisine,
         selectedPrice)),
         document.location.href= "index.html#ListAll";
     });
 
-    //clear button
+    $(document).bind("change", "#select-cuisine", function (event, ui) {
+        selectedCuisine = $('#select-cuisine').val();
+    });
+   
+    $(document).bind("change", "#select-priceRange", function (event, ui) {
+        selectedPrice = $('#select-priceRange').val();
+    });
+
+    //CLEAR button
     document.getElementById("buttonClear").addEventListener("click", function () {
         document.getElementById("name").value = "";
         document.getElementById("city").value = "";
@@ -47,13 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
         selectedPrice = "not selected";
     }); 
 
-    $(document).bind("change", "#select-cuisine", function (event, ui) {
-        selectedCuisine = $('#select-cuisine').val();
-    });
-   
-    $(document).bind("change", "#select-priceRange", function (event, ui) {
-        selectedPrice = $('#select-priceRange').val();
-    });
+
 
     //DELETE Movie
     document.getElementById("delete").addEventListener("click", function () {
@@ -77,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.location.href = "index.html#ListAll";
     });
 
-    // button on details page to view the website
+    // DETAILS button to view the website
     document.getElementById("website").addEventListener("click", function () {
         window.open(document.getElementById("oneURL").innerHTML);
     });
@@ -94,9 +95,8 @@ document.addEventListener("DOMContentLoaded", function () {
     $(document).on("pagebeforeshow", "#details", function (event) {   
         let restaurantID = localStorage.getItem("parm");  // get the unique key back from the dictionary
         let localID = GetArrayPointer (restaurantID); // map to which array it is
-        //document.getElementById("someID").innerHTML = restaurantID;
 
-        // next step to avoid bug in jQuery Mobile,  force the movie array to be current
+        // next step to avoid bug in jQuery Mobile,  force the restaurant array to be current
         restaurantArray = JSON.parse(localStorage.getItem("restaurantArray"));  
 
       // no longer using pointer -1 now that we have real keys
@@ -144,10 +144,10 @@ function createList() {
         element.addEventListener('click', function () {
         // get that data-parm we added for THIS particular li as we loop thru them
         let parm = this.getAttribute("data-parm");  // passing in the record.Id
-        // get our hidden <p> and save THIS ID value in the localStorage "dictionairy"
+        // get our hidden <p> and save THIS ID value in the localStorage "dictionary"
         localStorage.setItem('parm', parm);
         // but also, to get around a "bug" in jQuery Mobile, take a snapshot of the
-        // current movie array and save it to localStorage as well.
+        // current restaurant array and save it to localStorage as well.
         let stringRestaurantArray = JSON.stringify(restaurantArray); // convert array to "string"
         localStorage.setItem('restaurantArray', stringRestaurantArray);
         // now jump to our page that will use that one item
@@ -157,7 +157,7 @@ function createList() {
 
 };
  
-// remove a movie from array
+// REMOVE a Restaurant from array
 function deleteRestaurant(which) {
     console.log(which);
     let arrayPointer = GetArrayPointer(which);
