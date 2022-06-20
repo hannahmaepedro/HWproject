@@ -58,10 +58,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //DELETE Movie
     document.getElementById("delete").addEventListener("click", function () {
-        let localParm = localStorage.getItem('parm');  // get the unique key back from the dictionairy
+        let localParm = localStorage.getItem('parm');  // get the unique key back from the dictionary
         deleteRestaurant(localParm);
         createList();  // recreate li list after removing one
-        document.location.href = "index.html#ListAll";  // go back to movie list 
+        document.location.href = "index.html#ListAll";  // go back to restaurant list 
     });
 
     //SORT by Name
@@ -157,7 +157,7 @@ function createList() {
 
 };
  
-// REMOVE a Restaurant from array
+// DELETE a Restaurant from array
 function deleteRestaurant(which) {
     console.log(which);
     let arrayPointer = GetArrayPointer(which);
