@@ -43,6 +43,8 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("city").value = "";
         document.getElementById("state").value = "";
         document.getElementById("URL").value = "";
+        selectedCuisine = "not selected";
+        selectedPrice = "not selected";
     }); 
 
     $(document).bind("change", "#select-cuisine", function (event, ui) {
@@ -53,19 +55,29 @@ document.addEventListener("DOMContentLoaded", function () {
         selectedPrice = $('#select-priceRange').val();
     });
 
+    //DELETE Movie
+    document.getElementById("delete").addEventListener("click", function () {
+        let localParm = localStorage.getItem('parm');  // get the unique key back from the dictionairy
+        deleteRestaurant(localParm);
+        createList();  // recreate li list after removing one
+        document.location.href = "index.html#ListAll";  // go back to movie list 
+    });
+
+    //SORT by Name
     document.getElementById("buttonSortName").addEventListener("click", function () {
         restaurantArray.sort(dynamicSort("Name"));
         createList();
         document.location.href = "index.html#ListAll";
     });
-
+    
+    //SORT by Price Range
     document.getElementById("buttonSortPriceRange").addEventListener("click", function () {
         restaurantArray.sort(dynamicSort("Price"));
         createList();
         document.location.href = "index.html#ListAll";
     });
 
-    // button on details page to view the youtube video
+    // button on details page to view the website
     document.getElementById("website").addEventListener("click", function () {
         window.open(document.getElementById("oneURL").innerHTML);
     });
@@ -77,8 +89,6 @@ document.addEventListener("DOMContentLoaded", function () {
     $(document).on("pagebeforeshow", "#ListAll", function (event) {   // have to use jQuery 
         createList();
     });
-
-
 
     // need one for our details page to fill in the info based on the passed in ID
     $(document).on("pagebeforeshow", "#details", function (event) {   
@@ -147,7 +157,12 @@ function createList() {
 
 };
  
-
+// remove a movie from array
+function deleteRestaurant(which) {
+    console.log(which);
+    let arrayPointer = GetArrayPointer(which);
+    restaurantArray.splice(arrayPointer, 1);  // remove 1 element at index 
+}
 
 // cycles thru the array to find the array element with a matching ID
 function GetArrayPointer(localID) {
